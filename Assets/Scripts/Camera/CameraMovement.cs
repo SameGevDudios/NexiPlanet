@@ -24,11 +24,6 @@ public class CameraMovement : MonoBehaviour
           Mathf.Clamp(transform.position.x, _limitX.Min, _limitX.Max),
           transform.position.y,
           Mathf.Clamp(transform.position.z, _limitY.Min, _limitY.Max)
-      );
-    }
-    [System.Serializable]
-    private struct Limit
-    {
-        public float Min, Max;
+          );
     }
 }
