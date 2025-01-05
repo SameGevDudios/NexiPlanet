@@ -4,6 +4,7 @@ public class CameraZoomPerspective : CameraZoom
 {
     public CameraZoomPerspective(Camera cam) : base(cam)
     {
+        _zoomSpeed *= 4;
         _zoomLimit = new Limit(30, 100);
     }
     protected override void SelectCameraMode()
