@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraZoom
+public abstract class CameraZoom
 {
     protected Camera _cam;
     protected float _zoomSpeed = -5f, _lerpSpeed = 20f, _currentZoom;
@@ -23,24 +23,15 @@ public class CameraZoom
     {
         _currentZoom = _zoomLimit.Min;
     }
-    protected virtual void SelectCameraMode()
-    {
-        
-    }
+    protected abstract void SelectCameraMode();
     private void ReadZoom()
     {
         _currentZoom += PlayerInput.Zoom * _zoomSpeed;
     }
-    protected virtual void Rotation()
-    {
-
-    }
+    protected abstract void Rotation();
     private void LimitZoom()
     {
         _currentZoom = Mathf.Clamp(_currentZoom, _zoomLimit.Min, _zoomLimit.Max);
     }
-    protected virtual void UpdateZoom()
-    {
-
-    }
+    protected abstract void UpdateZoom();
 }
