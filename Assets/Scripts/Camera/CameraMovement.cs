@@ -13,9 +13,10 @@ public class CameraMovement : MonoBehaviour
     }
     private void MovePlayer()
     {
+        float boost = _playerInput.UseBoost ? _boost : 1;
         transform.position +=
-            Vector3.forward * _playerInput.Movement.y +
-            Vector3.right * _playerInput.Movement.x;
+            (Vector3.forward * _playerInput.Movement.y +
+            Vector3.right * _playerInput.Movement.x) * boost;
     }
     private void LimitPosition()
     {
