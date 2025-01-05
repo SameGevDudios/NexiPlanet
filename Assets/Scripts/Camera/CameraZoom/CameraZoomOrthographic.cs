@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraZoomOrthographic : CameraZoom
 {
-    public CameraZoomOrthographic(Camera cam, PlayerInput playerInput) : base(cam, playerInput)
+    public CameraZoomOrthographic(Camera cam) : base(cam)
     {
         _zoomLimit = new Limit(4, 10);
     }

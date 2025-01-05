@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private float _speed, _boost;
     [SerializeField] private Limit _limitX, _limitY;
 
@@ -13,10 +12,10 @@ public class CameraMovement : MonoBehaviour
     }
     private void MovePlayer()
     {
-        float boost = _playerInput.UseBoost ? _boost : 1;
+        float boost = PlayerInput.UseBoost ? _boost : 1;
         transform.position +=
-            (Vector3.forward * _playerInput.Movement.y +
-            Vector3.right * _playerInput.Movement.x) * _speed * boost;
+            (Vector3.forward * PlayerInput.Movement.y +
+            Vector3.right * PlayerInput.Movement.x) * _speed * boost;
     }
     private void LimitPosition()
     {

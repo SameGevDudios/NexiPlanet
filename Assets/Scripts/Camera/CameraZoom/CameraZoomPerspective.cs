@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraZoomPerspective : CameraZoom
 {
-    public CameraZoomPerspective(Camera cam, PlayerInput playerInput) : base(cam, playerInput)
+    public CameraZoomPerspective(Camera cam) : base(cam)
     {
         _zoomLimit = new Limit(30, 100);
     }
