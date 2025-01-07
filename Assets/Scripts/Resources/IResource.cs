@@ -1,4 +1,4 @@
 public interface IResource
 {
-    public void Collect();
+    void Collect();
 }
