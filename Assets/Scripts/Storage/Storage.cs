@@ -1,30 +1,22 @@
-using UnityEngine;
-using System.Collections.Generic;
-using TMPro;
+// This class should've been an abstract one, but [System.Serializable] attribute, which is necessary for unity editor, is incompatible with such classes.
+// So basically, that's an abstraction layer without abstractions.
 
-[System.Serializable]
 public class Storage
 {
-    [SerializeField] private List<TMP_Text> _resourceText;
-    [SerializeField] private string _resourceType;
-    private int _count;
-    public void AddResource(int count)
+    public string Type { get; protected set; }
+    public int Count { get; protected set; }
+    public Storage(string type)
     {
-        _count += count;
-        OnCountChanged();
+        Type = type;
+    }
+    public virtual void AddResource(int count)
+    {
+
     }
     public void RemoveResource(int count)
     {
-        _count -= count;
-        OnCountChanged();
+        Count -= count;
     }
-    private void OnCountChanged()
-    {
-        for (int i = 0; i < _resourceText.Count; i++)
-        {
-            _resourceText[i].text = _count.ToString();
-        }
-    }
-    public string GetResourceType => _resourceType;
-    public int GetCount => _count;
+    public bool CanRemove(int count) =>
+        Count <= count;
 }
