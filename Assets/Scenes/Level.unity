@@ -2965,7 +2965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _storageConfig:
-  - Type: Money
+  - Type: 0
     UseLimit: 0
     Limit: 0
 --- !u!1 &1727163587
@@ -3785,7 +3785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b75aa1143c06ba499e8ae316aafb0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceType: Money
+  _resourceType: 0
 --- !u!1 &2029562525
 GameObject:
   m_ObjectHideFlags: 0
