@@ -14,6 +14,7 @@ public class StorageController : MonoBehaviour
 
     [SerializeField] private List<StorageConfig> _storageConfig;
     private List<Storage> _storage = new();
+
     #region Singleton
     public static StorageController Instance;
     private void Awake() =>
@@ -26,12 +27,12 @@ public class StorageController : MonoBehaviour
     }
     private void ConfigureStorages()
     {
-        for (int i = 0; i < _storageConfig.Count; i++)
+        foreach(StorageConfig config in _storageConfig)
         {
-            if (_storageConfig[i].UseLimit)
-                _storage.Add(new LimitedStorage(_storageConfig[i].Type, _storageConfig[i].Limit));
+            if (config.UseLimit)
+                _storage.Add(new LimitedStorage(config.Type, config.Limit));
             else
-                _storage.Add(new UnlimitedStorage(_storageConfig[i].Type));
+                _storage.Add(new UnlimitedStorage(config.Type));
         }
     }
     public void AddResource(IResource.ResourceType resourceType, int count)
