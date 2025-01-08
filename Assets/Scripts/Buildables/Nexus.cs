@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Nexus : MonoBehaviour, IResource, IPlacable
 {
-    [SerializeField] private IResource.ResourceType _resourceType;
-    public void Collect()
+    [SerializeField] protected IResource.ResourceType _resourceType;
+    public virtual void Collect()
     {
-        StorageController.Instance.AddResource(_resourceType, 1);
+        // Mock
+        print("Collected resource");
     }
     public void Place()
     {

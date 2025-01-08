@@ -4,4 +4,8 @@ public class MainNexus : Nexus
     {
         Place();
     }
+    public override void Collect()
+    {
+        StorageController.Instance.AddResource(_resourceType, 1);
+    }
 }
