@@ -13,6 +13,7 @@ public class StorageController : MonoBehaviour
     }
 
     [SerializeField] private List<StorageConfig> _storageConfig;
+    [SerializeField] private ResourceTextController _resourceTextController;
     private List<Storage> _storage = new();
 
     #region Singleton
@@ -37,13 +38,18 @@ public class StorageController : MonoBehaviour
     }
     public void AddResource(IResource.ResourceType resourceType, int count)
     {
-        FindStorageByType(resourceType).AddResource(count);
+        Storage currentStorage = FindStorageByType(resourceType);
+        currentStorage.AddResource(count);
+        _resourceTextController.UpdateResourceText(resourceType, currentStorage.Count);
     }
     public void RemoveResource(IResource.ResourceType resourceType, int count)
     {
         Storage currentStorage = FindStorageByType(resourceType);
         if (currentStorage.CanRemove(count))
+        {
             currentStorage.RemoveResource(count);
+            _resourceTextController.UpdateResourceText(resourceType, currentStorage.Count);
+        }
     }
     private Storage FindStorageByType(IResource.ResourceType resourceType)
     {
