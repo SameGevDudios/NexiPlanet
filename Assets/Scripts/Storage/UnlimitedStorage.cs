@@ -1,6 +1,6 @@
 public class UnlimitedStorage : Storage
 {
-    public UnlimitedStorage(string Type) : base(Type)
+    public UnlimitedStorage(IResource.ResourceType Type) : base(Type)
     {
 
     }

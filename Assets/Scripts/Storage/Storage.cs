@@ -1,8 +1,8 @@
 public abstract class Storage
 {
-    public string Type { get; protected set; }
+    public IResource.ResourceType Type { get; protected set; }
     public int Count { get; protected set; }
-    public Storage(string type)
+    public Storage(IResource.ResourceType type)
     {
         Type = type;
     }

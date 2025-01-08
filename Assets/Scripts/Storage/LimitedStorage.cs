@@ -2,7 +2,7 @@ public class LimitedStorage : UnlimitedStorage
 {
     private int _limit;
 
-    public LimitedStorage(string Type, int limit) : base(Type)
+    public LimitedStorage(IResource.ResourceType Type, int limit) : base(Type)
     {
         _limit = limit;
     }

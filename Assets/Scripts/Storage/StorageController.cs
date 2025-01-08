@@ -7,7 +7,7 @@ public class StorageController : MonoBehaviour
     [System.Serializable]
     private struct StorageConfig
     {
-        public string Type;
+        public IResource.ResourceType Type;
         public bool UseLimit;
         public int Limit;
     }
@@ -34,17 +34,17 @@ public class StorageController : MonoBehaviour
                 _storage.Add(new UnlimitedStorage(_storageConfig[i].Type));
         }
     }
-    public void AddResource(string resourceType, int count)
+    public void AddResource(IResource.ResourceType resourceType, int count)
     {
         FindStorageByType(resourceType).AddResource(count);
     }
-    public void RemoveResource(string resourceType, int count)
+    public void RemoveResource(IResource.ResourceType resourceType, int count)
     {
         Storage currentStorage = FindStorageByType(resourceType);
         if (currentStorage.CanRemove(count))
             currentStorage.RemoveResource(count);
     }
-    private Storage FindStorageByType(string resourceType)
+    private Storage FindStorageByType(IResource.ResourceType resourceType)
     {
         foreach (Storage storage in _storage)
             if (storage.Type == resourceType)
