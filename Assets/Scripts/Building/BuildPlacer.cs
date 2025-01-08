@@ -6,7 +6,8 @@ public class BuildPlacer : MonoBehaviour
     [SerializeField] private LayerMask _placeBuildingMask, _proximityMask;
     [SerializeField] private Camera _cam;
     [SerializeField] private GameObject _buildLightHolder;
-    private GameObject _currentBuilding, _instantiatedBuilding;
+    private GameObject _currentSelected, _instantiatedBuilding;
+    private IPlacable _currentBuilding;
     [SerializeField] private Light _buildLight;
     [SerializeField] private float _buildingProximity;
     private bool _correctPosition;
@@ -16,16 +17,16 @@ public class BuildPlacer : MonoBehaviour
         if(_instantiatedBuilding != null && !EventSystem.current.IsPointerOverGameObject())
         {
             UpdateBuildingPosition();
-            bool canPlace = _correctPosition && NoBuildingsNearby;
+            bool canPlace = _correctPosition && NoBuildingsNearby && _currentBuilding.CanPlace();
             UpdateBuildLight(canPlace);
             if (PlayerInput.Build && canPlace)
                 PlaceBuilding();
         }
-
     }
     private void InstantiateBuilding()
     {
-        _instantiatedBuilding = Instantiate(_currentBuilding);
+        _instantiatedBuilding = Instantiate(_currentSelected);
+        _currentBuilding = _instantiatedBuilding.GetComponent<IPlacable>();
     }
     private void UpdateBuildingPosition()
     {
@@ -43,21 +44,21 @@ public class BuildPlacer : MonoBehaviour
     }
     private void PlaceBuilding()
     {
+        _currentBuilding.Place();
         InstantiateBuilding();
-        // BuyBuilding();
     }
     public void SetCurrentBuilding(GameObject building)
     {
         Destroy(_instantiatedBuilding);
-        _buildLightHolder.SetActive(_currentBuilding != building);
-        if (_currentBuilding != building)
+        _buildLightHolder.SetActive(_currentSelected != building);
+        if (_currentSelected != building)
         {
-            _currentBuilding = building;
+            _currentSelected = building;
             InstantiateBuilding();
         }
         else
         {
-            _currentBuilding = null;
+            _currentSelected = null;
         }
     }
     private bool NoBuildingsNearby =>

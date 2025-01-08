@@ -11,4 +11,9 @@ public class Nexus : MonoBehaviour, IResource, IPlacable
     {
         ResourceCollector.Instance.AddSource(this);
     }
+    public bool CanPlace()
+    {
+        // Mock
+        return true;
+    }
 }
