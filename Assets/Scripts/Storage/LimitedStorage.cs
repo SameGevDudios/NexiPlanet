@@ -8,6 +8,6 @@ public class LimitedStorage : UnlimitedStorage
     }
     public override void AddResource(int count)
     {
-        Count += UnityEngine.Mathf.Min(_limit, Count + count);
+        Count = UnityEngine.Mathf.Min(_limit, Count + count);
     }
 }
