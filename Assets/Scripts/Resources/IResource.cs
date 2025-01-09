@@ -1,5 +1,5 @@
 public interface IResource
 {
-    enum ResourceType { Money }
+    enum ResourceType { Money, Iron, Uranium }
     void Collect();
 }
