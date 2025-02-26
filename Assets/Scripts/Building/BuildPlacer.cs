@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class BuildPlacer : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class BuildPlacer : MonoBehaviour
     [SerializeField] private Light _buildLight;
     [SerializeField] private float _buildingProximity;
     private bool _correctPosition;
+    [Inject] private IInput _input;
 
     private void Update()
     {
@@ -19,7 +21,7 @@ public class BuildPlacer : MonoBehaviour
             UpdateBuildingPosition();
             bool canPlace = _correctPosition && NoBuildingsNearby && _currentBuilding.CanPlace();
             UpdateBuildLight(canPlace);
-            if (PlayerInput.Build && canPlace)
+            if (_input.Build() && canPlace)
                 PlaceBuilding();
         }
     }
@@ -30,7 +32,7 @@ public class BuildPlacer : MonoBehaviour
     }
     private void UpdateBuildingPosition()
     {
-        Ray camRay = _cam.ScreenPointToRay(PlayerInput.MousePosition);
+        Ray camRay = _cam.ScreenPointToRay(_input.MousePosition());
         _correctPosition = Physics.Raycast(camRay, out RaycastHit hit, 100, _placeBuildingMask);
         if (_correctPosition)
         {

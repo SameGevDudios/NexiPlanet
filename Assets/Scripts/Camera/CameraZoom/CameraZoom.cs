@@ -1,10 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 public abstract class CameraZoom
 {
     protected Camera _cam;
     protected float _zoomSpeed = -5f, _lerpSpeed = 20f, _currentZoom;
     protected Limit _zoomLimit, _rotationLimit = new Limit(45, 75);
+    [Inject] private IInput _input;
 
     public CameraZoom(Camera cam)
     {
@@ -26,7 +28,7 @@ public abstract class CameraZoom
     protected abstract void SelectCameraMode();
     private void ReadZoom()
     {
-        _currentZoom += PlayerInput.Zoom * _zoomSpeed;
+        _currentZoom += _input.Zoom() * _zoomSpeed;
     }
     protected abstract void Rotation();
     private void LimitZoom()

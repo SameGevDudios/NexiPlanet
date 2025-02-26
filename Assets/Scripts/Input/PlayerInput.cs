@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public static class PlayerInput
+public class PlayerInput  : IInput
 {
-    public static Vector2 Movement => 
+    public Vector2 Movement() => 
         new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-    public static Vector3 MousePosition =>
+    public Vector3 MousePosition() =>
         Input.mousePosition;
-    public static bool UseBoost =>
+    public bool UseBoost() =>
         Input.GetKey(KeyCode.LeftShift);
-    public static bool Build =>
+    public bool Build() =>
         Input.GetMouseButtonDown(0);
-    public static float Zoom =>
+    public float Zoom() =>
         Input.GetAxis("Mouse ScrollWheel");
 }
